@@ -1,6 +1,20 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity ^0.8.4;
 
+
+    // L2 contracts deployed to L1 as bytecode placeholders
+    address public l2TokenBridgeFactoryTemplate;
+    address public l2RouterTemplate;
+    address public l2StandardGatewayTemplate;
+    address public l2CustomGatewayTemplate;
+    address public l2WethGatewayTemplate;
+    address public l2WethTemplate;
+    address public l2MulticallTemplate;
+
+
+
+
+
 import {
     L1TokenBridgeRetryableSender,
     L1DeploymentAddresses,
