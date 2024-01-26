@@ -11,7 +11,14 @@ pragma solidity ^0.8.4;
     address public l2WethTemplate;
     address public l2MulticallTemplate;
 
-
+ function setDeployment(
+        address inbox,
+        L1DeploymentAddresses memory l1Deployment,
+        L2DeploymentAddresses memory l2Deployment
+    ) external {
+        if (msg.sender != IInbox(inbox).bridge().rollup().owner()) {
+            revert L1AtomicTokenBridgeCreator_OnlyRollupOwner();
+        }
 
 
 
