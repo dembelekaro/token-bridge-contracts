@@ -149,6 +149,17 @@ abstract contract L1ArbitrumMessenger {
         return l2ToL1Sender;
     }
 
+    /// @dev the l2ToL1Sender behaves as the tx.origin, the msg.sender should be validated to protect against reentrancies
+    function getL2ToL1Sender(address _inbox) internal view returns (address) {
+        IOutbox outbox = IOutbox(getBridge(_inbox).activeOutbox());
+        address l2ToL1Sender = outbox.l2ToL1Sender();
+
+        require(l2ToL1Sender != address(0), "NO_SENDER");
+        return l2ToL1Sender;
+    }
+
+
+
     /**
      * @notice Calls inbox to create retryable ticket. Default implementation is for standard Eth-based rollup, but it can be overriden to create retryable in ERC20-based rollup.
      * @param _inbox address of the rollup's inbox
@@ -188,6 +199,18 @@ abstract contract L1ArbitrumMessenger {
             );
     }
 }
+
+
+    /// @dev the l2ToL1Sender behaves as the tx.origin, the msg.sender should be validated to protect against reentrancies
+    function getL2ToL1Sender(address _inbox) internal view returns (address) {
+        IOutbox outbox = IOutbox(getBridge(_inbox).activeOutbox());
+        address l2ToL1Sender = outbox.l2ToL1Sender();
+
+        require(l2ToL1Sender != address(0), "NO_SENDER");
+        return l2ToL1Sender;
+    }
+
+
 
 interface IERC20Inbox {
     function createRetryableTicket(
